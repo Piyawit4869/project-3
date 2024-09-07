@@ -76,7 +76,6 @@ class Topping extends Controller
 
     }
 
-
     public function edit($id=null)
     {
         $topping = Toppings::find($id);

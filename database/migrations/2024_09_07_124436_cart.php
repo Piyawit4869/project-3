@@ -11,19 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order', function (Blueprint $table){
-
+        Schema::create('cart', function (Blueprint $table){
             $table->id();
-            $table->bigInteger('cart_id')->nullable();
-            $table->string('order_code')->nullable();
-            $table->decimal('total_price',8,2)->nullable();
-            // $table->integer('status')->nullable();
-
-
+            $table->bigInteger('product_id')->nullable();
+            $table->bigInteger('order_id')->nullable();
+            $table->string('sweety')->nullable();
+            $table->string('topping')->nullable();
+            $table->decimal('price',8,2)->nullable();
+            $table->integer('quantity')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
-
         });
     }
 
@@ -32,6 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order');
+        Schema::dropIfExists('cart');
     }
+
 };
