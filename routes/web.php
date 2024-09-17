@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Product As Product;
 use App\Http\Controllers\Admin\Dashboard As Dashboard;
@@ -9,6 +10,10 @@ use App\Http\Controllers\Admin\Category As Category;
 use App\Http\Controllers\Admin\Order As Order;
 use App\Http\Controllers\Admin\Sweety As Sweety;
 use App\Http\Controllers\Admin\Topping As Topping;
+// use App\Http\Controllers\Promote\index As index;
+use App\Http\Controllers\Promote\promote As promote;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,15 +26,21 @@ use App\Http\Controllers\Admin\Topping As Topping;
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('promote.index');
 });
 
-
-// Route::prefix('promote')->name('promote.')->group(function(){
-
-
-//     Route::get('/', function () {return view('welcome');});
+//route promote
+//route index
+Route::get('/index',[promote::class, 'index'])->name('promote.index');
+//route menu
+Route::get('/promote/menu', [promote::class, 'menu'])->name('promote.menu');
+//route order
+Route::get('/promote/order', [promote::class, 'order'])->name('promote.order');
+//route contact
+Route::get('/promote/contact', [promote::class, 'contact'])->name('promote.contact');
+Route::get('/promote/detail', [promote::class, 'detail'])->name('promote.detail');
 
 
 
@@ -40,9 +51,6 @@ Route::prefix('api')->name('api.')->group(function(){
 
     Route::get('/', function () {return view('welcome');});
     Route::get('data', [Product::class, 'getdata'])->name('getdata');
-
-
-
 });
 
 
@@ -127,6 +135,10 @@ Route::prefix ('admin')->name('admin.') ->group (function (){
 
 
 });
+
+//route login
+Route::get('/login', [AuthenticatedSessionController::class, 'login'])->name('login');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
